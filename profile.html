@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kdev73637 | Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 80px 20px 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 4.5em;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+
+        header p {
+            font-size: 1.35em;
+            opacity: 0.98;
+            margin-bottom: 8px;
+            font-weight: 300;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+
+        .tagline {
+            font-size: 1.05em;
+            opacity: 0.9;
+            margin-top: 20px;
+            font-weight: 300;
+            animation: slideInLeft 0.8s ease-out 0.6s both;
+        }
+
+        .projects-section {
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 32px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 45px rgba(102, 126, 234, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 14px;
+            font-size: 1.65em;
+            font-weight: 700;
+            transition: color 0.3s ease;
+            letter-spacing: -0.3px;
+        }
+
+        .project-card:hover h3 {
+            color: #764ba2;
+        }
+
+        .project-card p {
+            color: #555;
+            margin-bottom: 18px;
+            flex-grow: 1;
+            font-size: 1.02em;
+            line-height: 1.7;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 2px solid #f0f0f0;
+            font-size: 0.95em;
+            gap: 12px;
+        }
+
+        .language {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            color: #667eea;
+            padding: 7px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 1px solid #667eea30;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .project-card:hover .language {
+            background: linear-gradient(135deg, #667eea25 0%, #764ba225 100%);
+            transform: scale(1.05);
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .project-link:hover {
+            color: #764ba2;
+            gap: 10px;
+        }
+
+        .project-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-link::after {
+            transform: translateX(4px);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 50px 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.15);
+            margin-top: 60px;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        footer p {
+            opacity: 0.95;
+            margin-bottom: 18px;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.05em;
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .social-links a:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 35px;
+            opacity: 0.85;
+            font-size: 0.95em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 3em;
+            }
+
+            header p {
+                font-size: 1.15em;
+            }
+
+            .tagline {
+                font-size: 0.95em;
+            }
+
+            .section-title {
+                font-size: 2.2em;
+                margin-bottom: 35px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .project-card {
+                padding: 24px;
+                border-radius: 12px;
+            }
+
+            .project-card h3 {
+                font-size: 1.4em;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-links a {
+                font-size: 0.95em;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 60px 15px 40px;
+            }
+
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .project-card h3 {
+                font-size: 1.25em;
+            }
+
+            .project-card p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>kdev73637</h1>
+            <p>Full Stack Developer & Web Designer</p>
+            <p class="tagline">Building elegant solutions for interior design, AI agents, and web applications</p>
+        </header>
+
+        <section class="projects-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>AI Agentic Lab</h3>
+                    <p>Advanced AI agent framework and experimentation laboratory for building intelligent autonomous systems with cutting-edge technology.</p>
+                    <div class="project-meta">
+                        <span class="language">TypeScript</span>
+                        <a href="https://github.com/kdev73637-a11y/ai-agentic-lab" class="project-link">Explore</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>AI Agents Website</h3>
+                    <p>Professional website dedicated to AI agents, featuring comprehensive documentation and showcase of agent capabilities and features.</p>
+                    <div class="project-meta">
+                        <span class="language">TypeScript</span>
+                        <a href="https://github.com/kdev73637-a11y/ai-agents-website" class="project-link">Explore</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Ujjwal Interior</h3>
+                    <p>Beautiful interior design portfolio website showcasing professional interior designing work, projects, and creative design solutions.</p>
+                    <div class="project-meta">
+                        <span class="language">HTML</span>
+                        <a href="https://github.com/kdev73637-a11y/Ujjwal-Interior" class="project-link">Explore</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>School Website</h3>
+                    <p>Comprehensive school management website with information about CBSE school programs, facilities, and academic excellence.</p>
+                    <div class="project-meta">
+                        <span class="language">JavaScript</span>
+                        <a href="https://github.com/kdev73637-a11y/school-website" class="project-link">Explore</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Swift Convert</h3>
+                    <p>Innovative web application for converting files between multiple formats including PDF, DOC, JPG, PNG and more with ease.</p>
+                    <div class="project-meta">
+                        <span class="language">Web App</span>
+                        <a href="https://github.com/kdev73637-a11y/swift-convert" class="project-link">Explore</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Civil Design Antigravity</h3>
+                    <p>Advanced civil design project with innovative antigravity concepts and structural engineering visualization and modeling.</p>
+                    <div class="project-meta">
+                        <span class="language">TypeScript</span>
+                        <a href="https://github.com/kdev73637-a11y/civil-design-antigravity" class="project-link">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>💻 Full Stack Development | 🎨 Web Design | 🤖 AI Solutions</p>
+            <p>Crafting modern, scalable web experiences</p>
+            <div class="social-links">
+                <a href="https://github.com/kdev73637-a11y">GitHub</a>
+                <a href="https://github.com/kdev73637-a11y?tab=repositories">Repositories</a>
+            </div>
+            <p class="footer-bottom">© 2026 kdev73637. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
